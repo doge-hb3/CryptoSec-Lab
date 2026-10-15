@@ -40,3 +40,11 @@ Windows 虚拟环境启动器使首次 RSS 采样约 4 MiB，复核后改为采�
 源码人工检查：没有硬编码真实密钥、Token 或真实用户口令；密钥、盐和实验口令均动态生成。已知向量为公开教学字符串，基准文件只记录参数和资源数据。模式检查不能证明不存在任何漏洞，不将其表述为完整安全审计。
 
 Git 已初始化为 main，使用用户提供的署名并只设置于本仓库。首次提交信息为 `feat: bootstrap CryptoSec-Lab teaching MVP`，实际提交哈希以 `git log -1` 及最终汇报为准。没有配置 remote，也没有创建公开仓库、远程 Release 或 push。CI 的其他系统/解释器版本尚待远程执行。今天只有一篇文章稿，按最新约束保留本地待发布。
+
+## 首次公开后的 CI 修复（2026-10-15）
+
+用户随后创建了 `doge-hb3/CryptoSec-Lab` 并自行完成首次推送。首次提交的 [CI 运行](https://github.com/doge-hb3/CryptoSec-Lab/actions/runs/38744082679) 显示：Ubuntu 的 Python 3.11/3.12/3.13 三项均成功；Windows 三项均在 pytest 阶段失败，51 passed / 2 failed。
+
+[Windows 3.12 日志](https://github.com/doge-hb3/CryptoSec-Lab/actions/runs/38744082679/job/116453007820) 中，两项 `test_entrypoint` 报 FileNotFoundError / WinError 2。测试原先假设 CLI 与 python.exe 位于同一目录；标准 Windows Python 的入口安装在 Scripts 子目录，本地虚拟环境未暴露这个差异。已改为读取 `sysconfig.get_path("scripts")`，继续调用实际安装的 CLI。另核实 Dependabot setup-python 更新分支的同版本任务存在同一失败原因。
+
+修复后本地重新执行：pytest 53 passed in 2.11s；Ruff check 和 format --check 均通过；文档链接、Python 文档示例及常见敏感信息模式检查通过。此次仅修复测试的安装路径假设并记录结果，未修改算法或跳过测试。修复准备为本地提交，按用户约束不自动 push；新提交的远程六项结果须在用户推送后另行核实。

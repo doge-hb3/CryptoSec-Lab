@@ -26,8 +26,16 @@
 
 ## 后续（需维护者操作或后续任务）
 
-- [ ] 创建 GitHub 仓库、授权设置远程并 push
-- [ ] 在真实远程运行 CI、启用私密漏洞报告与 Discussions
+- [x] 用户创建 GitHub 仓库、设置远程并完成首次 push
+- [x] 首次远程 CI 已实际执行并读取结果
+- [ ] 启用私密漏洞报告与 Discussions
 - [ ] 配置实际 Topics、标签与 Good First Issues
 - [ ] 确认后发布今天仅一篇文章
 - [ ] 按路线实现 Vigenère、仿射密码及更多主题
+
+## 首次远程 CI 修复
+
+- [x] 读取首次提交和 Dependabot 分支 CI 日志，确认 Windows 的两个 CLI 测试失败
+- [x] 将测试入口路径改为 sysconfig scripts 路径，保留实际 CLI 子进程调用
+- [x] 本地重新运行测试、Ruff 和文档检查
+- [ ] 用户推送修复后，核实六项远程 CI 的新结果

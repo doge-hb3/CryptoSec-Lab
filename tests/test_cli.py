@@ -1,7 +1,7 @@
 import json
 import os
 import subprocess
-import sys
+import sysconfig
 from pathlib import Path
 
 import pytest
@@ -13,7 +13,9 @@ from cryptosec_lab.benchmark import benchmark
     "command,field", [("caesar", "frequency_recovery"), ("aes", "tamper_rejected")]
 )
 def test_entrypoint(command, field):
-    executable = Path(sys.executable).parent / ("cryptosec.exe" if os.name == "nt" else "cryptosec")
+    executable = Path(sysconfig.get_path("scripts")) / (
+        "cryptosec.exe" if os.name == "nt" else "cryptosec"
+    )
     result = subprocess.run(
         [str(executable), command], capture_output=True, text=True, check=True, timeout=10
     )

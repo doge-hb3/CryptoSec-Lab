@@ -2,6 +2,10 @@
 
 遵循 SemVer。尚未创建远程 Release。
 
+## Unreleased
+
+- 修复 CLI 测试在 Windows 标准 Python 安装下错误定位入口的问题：使用 sysconfig 的 scripts 安装路径，兼容虚拟环境与标准安装。
+
 ## 0.1.0 — 2026-10-15（本地发布候选）
 
 - Caesar 加解密、26 个候选及英语频率排名、离线可视化。
