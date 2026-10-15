@@ -1,0 +1,15 @@
+name: Documentation / 文档问题
+description: Clarify a concept, command or explanation
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Document path
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: What is unclear, and what would help?
+    validations:
+      required: true

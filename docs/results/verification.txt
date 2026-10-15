@@ -1,0 +1,38 @@
+> python -m pip check
+No broken requirements found.
+
+> python -m pytest -q
+.....................................................                    [100%]
+53 passed in 4.91s
+
+> python -m ruff check .
+All checks passed!
+
+> python -m ruff format --check .
+31 files already formatted
+
+> python scripts/check_repository.py
+Dwwdfn dw gdzq!
+Attack at dawn!
+7 True
+aGVsbG8=
+2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+b'CryptoSec-Lab'
+True
+False
+Repository checks passed: 43 files; links, Python examples, secret patterns.
+
+> cryptosec caesar
+{
+  "ciphertext_prefix": "AOL XBPJR IYVDU MVE",
+  "recovered_shift": 7,
+  "roundtrip": true,
+  "frequency_recovery": true
+}
+
+> cryptosec aes
+{
+  "roundtrip": true,
+  "tamper_rejected": true,
+  "nonce_bytes": 12
+}

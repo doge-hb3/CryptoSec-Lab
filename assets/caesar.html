@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CryptoSec-Lab · Caesar 交互实验</title>
+<style>
+body{max-width:960px;margin:40px auto;padding:0 24px;background:#f8fafc;color:#17233b;font:17px/1.7 system-ui}
+textarea{box-sizing:border-box;width:100%;padding:12px;font:inherit}input{width:65%}
+pre{overflow:auto;white-space:pre-wrap;background:white;border:1px solid #cbd5e1;padding:16px}
+section{background:white;padding:20px;margin:18px 0;border:1px solid #cbd5e1;border-radius:10px}
+.bars{display:flex;align-items:end;height:150px;gap:5px}.bar{flex:1;text-align:center;font-size:11px}
+.fill{background:#2563eb;min-height:1px}.cipher .fill{background:#0f766e}label{display:block}
+</style>
+<h1>Caesar：移位改变字母，不消除统计结构</h1>
+<p>离线演示 · 仅处理 ASCII 字母 · 拖动滑块或用左右方向键操作 · 不能保护真实秘密</p>
+<label for="plain">教学明文（最多 2000 字符）</label>
+<textarea id="plain" rows="3" maxlength="2000">THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.</textarea>
+<label for="shift">移位：<output id="value">3</output></label>
+<input id="shift" type="range" min="0" max="25" value="3">
+<section><h2>字母映射与密文</h2><pre id="mapping"></pre><pre id="cipher" aria-live="polite"></pre></section>
+<section><h2>原文字频</h2><div id="before" class="bars" role="img" aria-label="原文字母频数柱状图"></div>
+<h2>密文字频</h2><div id="after" class="bars cipher" role="img" aria-label="密文字母频数柱状图"></div></section>
+<p>观察：最高柱的字母位置移动，但柱高分布仍保留。频率分析依赖语言和样本长度，不保证正确恢复。</p>
+<script>
+const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+function bars(id,text){
+  const counts=Array.from(alphabet,c=>[c,[...text.toUpperCase()].filter(x=>x===c).length]);
+  const max=Math.max(1,...counts.map(x=>x[1]));const root=document.getElementById(id);root.replaceChildren();
+  for(const [c,n] of counts){const node=document.createElement('div');node.className='bar';
+    const fill=document.createElement('div');fill.className='fill';fill.style.height=`${110*n/max}px`;
+    node.append(fill,document.createTextNode(`${c} ${n}`));root.append(node);}
+}
+function update(){
+ const k=Number(document.getElementById('shift').value);const plain=document.getElementById('plain').value;
+ const cipher=plain.replace(/[A-Za-z]/g,c=>{const base=c<='Z'?65:97;return String.fromCharCode(base+(c.charCodeAt(0)-base+k)%26);});
+ document.getElementById('value').textContent=k;
+ document.getElementById('mapping').textContent=alphabet+'\n'+alphabet.slice(k)+alphabet.slice(0,k);
+ document.getElementById('cipher').textContent=cipher;bars('before',plain);bars('after',cipher);
+}
+document.getElementById('plain').addEventListener('input',update);
+document.getElementById('shift').addEventListener('input',update);update();
+</script>
+</html>

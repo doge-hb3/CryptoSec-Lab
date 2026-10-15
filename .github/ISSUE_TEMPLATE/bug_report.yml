@@ -1,0 +1,22 @@
+name: Bug report / 错误报告
+description: Report a reproducible problem using synthetic inputs
+body:
+  - type: textarea
+    id: environment
+    attributes:
+      label: Version, Python and OS
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Commands and synthetic reproduction
+      description: Do not include real passwords, keys or credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true

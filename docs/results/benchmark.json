@@ -1,0 +1,59 @@
+{
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "repeats": 3,
+  "results": [
+    {
+      "algorithm": "argon2id",
+      "parameters": {
+        "memory_kib": 65536,
+        "time_cost": 3,
+        "parallelism": 4
+      },
+      "hash_ms": [
+        33.69520000705961,
+        33.107699986430816,
+        33.64280000096187
+      ],
+      "median_hash_ms": 33.64280000096187,
+      "median_cpu_ms": 125.0,
+      "sampled_peak_process_tree_rss_mib": 93.8359375
+    },
+    {
+      "algorithm": "scrypt",
+      "parameters": {
+        "n": 16384,
+        "r": 8,
+        "p": 1,
+        "dklen": 32,
+        "maxmem": 33554432
+      },
+      "hash_ms": [
+        140.73819998884574,
+        142.35939999343827,
+        140.13049998902716
+      ],
+      "median_hash_ms": 140.73819998884574,
+      "median_cpu_ms": 140.625,
+      "sampled_peak_process_tree_rss_mib": 45.41015625
+    },
+    {
+      "algorithm": "pbkdf2",
+      "parameters": {
+        "hash": "sha256",
+        "iterations": 100000,
+        "dklen": 32
+      },
+      "hash_ms": [
+        21.94200000667479,
+        20.51079999364447,
+        19.793100000242703
+      ],
+      "median_hash_ms": 20.51079999364447,
+      "median_cpu_ms": 15.625,
+      "sampled_peak_process_tree_rss_mib": 30.1796875
+    }
+  ],
+  "method": "Fresh process per KDF; hash timing excludes verification; tree RSS sampled every 10 ms.",
+  "limits": "RSS includes interpreter/imports/verification, may miss peaks; not equal security."
+}

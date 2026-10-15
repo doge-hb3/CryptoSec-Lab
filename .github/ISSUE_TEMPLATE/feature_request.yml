@@ -1,0 +1,16 @@
+name: Feature request / 实验提案
+description: Propose a bounded, educational experiment
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Learning goal and expected learner
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Proposed demo, test and resource boundaries
+      description: Use generated data or authorized local environments only.
+    validations:
+      required: true
